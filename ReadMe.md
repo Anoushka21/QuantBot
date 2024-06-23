@@ -4,7 +4,7 @@
 
 **Design**
 
-![alt text](<img\Design.png>)
+![Design](<./img/Design.png>)
 The Chatbot takes user's query and sends the query and database schema to the open source LLM which generates an SQL Query. This SQl Query is run and the results are sent back to the LLM which parses it and gives the answer in natural language that is easily understood by anyone.
 <br>
 
@@ -12,7 +12,7 @@ The Chatbot takes user's query and sends the query and database schema to the op
 
 Main techstack includes-
 
-![alt text](<img\techstack.png>)
+![TechStack](<./img/techstack.png>)
 
 ## Installation
 

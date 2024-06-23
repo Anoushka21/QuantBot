@@ -59,6 +59,6 @@ llm = HuggingFacePipeline.from_model_id(
 
 ```
 
-- The ChatBot doesn't answer all questions well right now mainly because the tables have data columns which are JSON fields. These columns have a lot of keys and the LLM doesn't have context on these exact keys. If we provide the LLM with the exact structure and meaning of these keys as context it improve its answering capability. Prompt engineering the template with context would help.
+- The ChatBot doesn't answer all questions well right now mainly because the tables have data columns which are JSON fields. These columns have a lot of keys and the LLM doesn't have context on these exact keys. If we provide the LLM with the exact structure and meaning of these keys as context it will improves its answering capability --> Prompt engineering the template with context would help.
 
 - Another way to improve could be finetuning the LLM itself to perform better on Querying task or expirement with other open source LLM's available.

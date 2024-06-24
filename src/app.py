@@ -17,6 +17,20 @@ def init_database(user: str, password: str, host: str, port: str, database: str)
   logger.info(f"Initializing database connection with URI: {db_uri}")
   return SQLDatabase.from_uri(db_uri)
 
+def is_generic_query(query):
+    generic_patterns = [
+        r"how can you help", 
+        r"what can you do", 
+        r"help me", 
+        r"what are your capabilities", 
+        r"assist me",
+        r"who are you"
+    ]
+    for pattern in generic_patterns:
+        if re.search(pattern, query, re.IGNORECASE):
+            return True
+    return False
+
 def get_sql_chain(db):
   template = """
     You are a data analyst at a financial company. You are interacting with a user who is asking you questions about their account and portfolio.
@@ -54,20 +68,6 @@ def get_sql_chain(db):
     | llm
     | StrOutputParser()
   )
-
-def is_generic_query(query):
-    generic_patterns = [
-        r"how can you help", 
-        r"what can you do", 
-        r"help me", 
-        r"what are your capabilities", 
-        r"assist me",
-        r"who are you"
-    ]
-    for pattern in generic_patterns:
-        if re.search(pattern, query, re.IGNORECASE):
-            return True
-    return False
     
 def get_response(user_query: str, db: SQLDatabase, chat_history: list):
   logger.info(f"Received user query: {user_query}")
@@ -122,14 +122,13 @@ if "chat_history" not in st.session_state:
 
 load_dotenv()
 
+# Streamlit app
 st.set_page_config(page_title="Chat with QuantBot", page_icon=":speech_balloon:")
 
 st.title("Chat with QuantBot")
 
 with st.sidebar:
-    st.subheader("Settings")
-    st.write("Connect to the database and start chatting.")
-    
+    st.subheader("Settings")    
     st.text_input("Host", value="localhost", key="Host")
     st.text_input("Port", value="3306", key="Port")
     st.text_input("User", value="root", key="User")
